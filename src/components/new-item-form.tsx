@@ -1,5 +1,6 @@
 import { Color } from "@prisma/client";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { itemSchema } from "schemas/item.schema";
 import { ItemDTO } from "types/item.dto";
 import FormikSelect from "./formik-select";
 
@@ -11,13 +12,16 @@ interface NewProductFormProps {
 const NewItemForm: React.FC<NewProductFormProps> = (props) => {
   const { onSubmit, productId } = props;
   return (
-    <Formik initialValues={[{
-      amount: 0,
-      color: "RED",
-    }]} onSubmit={(values: Omit<ItemDTO, "productId">[], bag) => {
-      onSubmit(values.map(item => ({ ...item, productId })));
-      bag.resetForm();
-    }}>
+    <Formik
+      initialValues={[{
+        amount: 0,
+        color: "RED",
+      }]}
+      onSubmit={(values: Omit<ItemDTO, "productId">[], bag) => {
+        onSubmit(values.map(item => ({ ...item, productId })));
+        bag.resetForm();
+      }}
+      validationSchema={itemSchema}>
       {({ values, setValues }) => (
         <Form>
           <h2>Add new items:</h2>

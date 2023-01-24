@@ -1,4 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { productSchema } from "schemas/product.schema";
 import { ProductDTO } from "types/product.dto";
 
 interface NewProductFormProps {
@@ -9,14 +10,18 @@ interface NewProductFormProps {
 const NewProductForm: React.FC<NewProductFormProps> = (props) => {
   const { onSubmit, categoryId } = props;
   return (
-    <Formik initialValues={{
-      name: "",
-      cost: 0,
-      brand: ""
-    }} onSubmit={(values, bag) => {
-      onSubmit({ ...values, categoryId });
-      bag.resetForm();
-    }}>
+    <Formik
+      initialValues={{
+        name: "",
+        cost: 0,
+        brand: ""
+      }}
+      onSubmit={(values, bag) => {
+        onSubmit({ ...values, categoryId });
+        bag.resetForm();
+      }}
+      validationSchema={productSchema}
+    >
       <Form>
         <h2>Add a new product:</h2>
         <div>
