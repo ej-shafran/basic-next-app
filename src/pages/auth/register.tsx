@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 // import { useRouter } from "next/router";
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { omit } from 'lodash';
 import axios from "axios";
 
@@ -27,18 +27,22 @@ const RegisterPage: NextPage = () => {
           <div>
             <label htmlFor="name">Enter your name:</label>
             <Field name="name" id="name" />
+            <ErrorMessage name="name" />
           </div>
           <div>
             <label htmlFor="email">Enter your email:</label>
             <Field name="email" id="email" type="email" />
+            <ErrorMessage name="email" />
           </div>
           <div>
             <label htmlFor="password">Enter your password:</label>
             <Field name="password" type="password" id="password" />
+            <ErrorMessage name="password" />
           </div>
           <div>
             <label htmlFor="confirmPassword">Confirm your password:</label>
             <Field name="confirmPassword" type="password" id="confirmPassword" />
+            <ErrorMessage name="confirmPassword" />
           </div>
           <button type="submit">Sign Up</button>
         </Form>

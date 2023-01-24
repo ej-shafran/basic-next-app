@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { signIn } from 'next-auth/react';
 import { useRouter } from "next/router";
 
@@ -29,10 +29,12 @@ const SignInPage: NextPage = () => {
           <div>
             <label htmlFor="email">Enter your email:</label>
             <Field name="email" id="email" type="email" />
+            <ErrorMessage name="email" />
           </div>
           <div>
             <label htmlFor="password">Enter your password:</label>
             <Field name="password" id="password" type="password" />
+            <ErrorMessage name="password" />
           </div>
           <button type="submit">Sign In</button>
         </Form>
