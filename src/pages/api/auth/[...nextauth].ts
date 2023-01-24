@@ -1,5 +1,8 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import { compare } from 'bcrypt';
+
+import db from 'db';
 
 export default NextAuth({
   session: {
@@ -9,13 +12,14 @@ export default NextAuth({
     Credentials({
       type: "credentials",
       credentials: {},
-      authorize(credentials: { email: string; password: string; }, req) {
-        if(credentials.email === "evyatar@gmail.com" && credentials.password === "asdfasdf") return {
-          id: "hi",
-          email: "hi",
-          password: "hi"
-        }
-        return null;        
+      authorize: async (credentials: { email: string; password: string; }, req) => {
+        const user = await db.user.findUnique({ where: { email: credentials.email } });
+        if (!user) throw new Error("Invalid credentials.");
+
+        const correct = await compare(credentials.password, user.password);
+        if (!correct) throw new Error("Invalid credentials.");
+
+        return user;
       },
     })
   ],
@@ -24,12 +28,10 @@ export default NextAuth({
   },
   callbacks: {
     jwt(params) {
-      console.log(params);
       return params.token;
     },
     session(params) {
-      console.log(params);
-      return params.session; 
+      return params.session;
     },
   }
 })
