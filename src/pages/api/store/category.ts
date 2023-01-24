@@ -6,7 +6,6 @@ import db from 'db';
 class CategoryHandler {
   @Post()
   async addCategory(@Body(ValidationPipe) body: CategoryDTO) {
-    console.log(body);
     await db.category.create({ data: body }); 
     return true;
   }

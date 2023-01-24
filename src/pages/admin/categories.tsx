@@ -17,6 +17,7 @@ const CategoriesPage: NextPage<PageProps> = (props: PageProps) => {
   const router = useRouter();
 
   return (<div>
+  <h1>All Categories</h1>
     <section>
       <NewCategoryForm onSubmit={async values => {
         try {
@@ -32,7 +33,7 @@ const CategoriesPage: NextPage<PageProps> = (props: PageProps) => {
       <h2>Existing categories:</h2>
       <ol>
         {categories.map(({ id, name }) => (<li key={id}>
-          <Link href={`/admin/category/${id}`}>{name}</Link>
+          <Link href={`/admin/category/${id}/products`}>{name}</Link>
         </li>))}
       </ol>
     </section>
