@@ -47,8 +47,13 @@ const ProductsPage: NextPage<PageProps> = (props) => {
               router.push("/error")
             }
           }}>Delete</button>
+          <br />
         </li>))}
       </ol>
+    </section>
+
+    <section>
+      <Link href={`/admin/category/${categoryId}/products`}>Back to products</Link>
     </section>
   </div>);
 }

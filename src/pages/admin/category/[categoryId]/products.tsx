@@ -35,7 +35,7 @@ const ProductsPage: NextPage<PageProps> = (props) => {
       <h2>Existing products:</h2>
       <ol>
         {products.map(({ id, name }) => (<li key={id}>
-          <Link href={`/admin/category/${categoryId}/product/${id}/items`}>{name}</Link>
+          <p><Link href={`/admin/category/${categoryId}/product/${id}/items`}>{name}</Link></p>
           <button onClick={async () => {
             try {
               await axios.delete("/api/store/product", {
@@ -48,6 +48,10 @@ const ProductsPage: NextPage<PageProps> = (props) => {
           }}>Delete</button>
         </li>))}
       </ol>
+    </section>
+
+    <section>
+      <Link href={`/admin/categories`}>Back to categories</Link>
     </section>
   </div>);
 }

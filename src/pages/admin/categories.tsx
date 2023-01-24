@@ -33,7 +33,7 @@ const CategoriesPage: NextPage<PageProps> = (props: PageProps) => {
       <h2>Existing categories:</h2>
       <ol>
         {categories.map(({ id, name }) => (<li key={id}>
-          <Link href={`/admin/category/${id}/products`}>{name}</Link>
+          <p><Link href={`/admin/category/${id}/products`}>{name}</Link></p>
           <button onClick={async () => {
             try {
               await axios.delete("/api/store/category", {
