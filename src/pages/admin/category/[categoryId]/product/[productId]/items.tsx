@@ -37,6 +37,16 @@ const ProductsPage: NextPage<PageProps> = (props) => {
       <ol>
         {items.map(({ id }) => (<li key={id}>
           <p>Item: ID ${id}</p>
+          <button onClick={async () => {
+            try {
+              await axios.delete("/api/store/item", {
+                params: { id }
+              });
+              router.push(router.asPath);
+            } catch (error) {
+              router.push("/error")
+            }
+          }}>Delete</button>
         </li>))}
       </ol>
     </section>

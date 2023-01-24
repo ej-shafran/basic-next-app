@@ -17,7 +17,7 @@ const CategoriesPage: NextPage<PageProps> = (props: PageProps) => {
   const router = useRouter();
 
   return (<div>
-  <h1>All Categories</h1>
+    <h1>All Categories</h1>
     <section>
       <NewCategoryForm onSubmit={async values => {
         try {
@@ -34,6 +34,16 @@ const CategoriesPage: NextPage<PageProps> = (props: PageProps) => {
       <ol>
         {categories.map(({ id, name }) => (<li key={id}>
           <Link href={`/admin/category/${id}/products`}>{name}</Link>
+          <button onClick={async () => {
+            try {
+              await axios.delete("/api/store/category", {
+                params: { id }
+              });
+              router.push(router.asPath);
+            } catch (error) {
+              router.push("/error")
+            }
+          }}>Delete</button>
         </li>))}
       </ol>
     </section>
