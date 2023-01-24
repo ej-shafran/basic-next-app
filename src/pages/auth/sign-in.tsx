@@ -3,6 +3,8 @@ import { Formik, Form, Field } from 'formik';
 import { signIn } from 'next-auth/react';
 import { useRouter } from "next/router";
 
+import { signInSchema } from 'schemas/sign-in.schema';
+
 const SignInPage: NextPage = () => {
   const router = useRouter();
 
@@ -21,6 +23,7 @@ const SignInPage: NextPage = () => {
           if (!result.error && result.ok) router.push("/");
           else router.push("/error");
         }}
+        validationSchema={signInSchema}
       >
         <Form>
           <div>

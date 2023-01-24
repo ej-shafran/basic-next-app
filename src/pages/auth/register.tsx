@@ -1,10 +1,11 @@
 import { NextPage } from "next";
+// import { useRouter } from "next/router";
 import { Formik, Form, Field } from 'formik';
 import { omit } from 'lodash';
 import axios from "axios";
 
 import { RegisterDTO } from "types/register.dto";
-// import { useRouter } from "next/router";
+import { registerSchema } from "class-validator";
 
 const RegisterPage: NextPage = () => {
   // const router = useRouter();
@@ -19,7 +20,9 @@ const RegisterPage: NextPage = () => {
           }
           const { data: id } = await axios.post<number>("/api/auth/register", body);
           console.log(id);
-        }}>
+        }}
+        validationSchema={registerSchema}
+      >
         <Form>
           <div>
             <label htmlFor="name">Enter your name:</label>
