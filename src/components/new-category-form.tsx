@@ -18,9 +18,11 @@ export const NewCategoryForm: React.FC<NewCategoryFormProps> = (props) => {
     >
       <Form>
         <h2>Add a new category:</h2>
-        <label htmlFor="name">Enter the category's name:</label>
-        <Field name="name" id="name" />
-        <ErrorMessage name="name" />
+        <div>
+          <label htmlFor="name">Enter the category's name:</label>
+          <Field name="name" id="name" />
+          <ErrorMessage name="name" />
+        </div>
         <button type="submit">Add</button>
       </Form>
     </Formik>
