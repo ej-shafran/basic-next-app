@@ -7,7 +7,7 @@ import { Role } from "@prisma/client";
 class RegisterHandler {
   @Post()
   async register(@Body(ValidationPipe) body: RegisterDTO) {
-    const role = process.env.NODE_ENV === "test" ? Role.ADMIN : Role.CUSTOMER;
+    const role = process.env.ROLE === "ADMIN" ? Role.ADMIN : Role.CUSTOMER;
     const user = await db.user.create({ data: { ...body, role } });
     return user.id;
   }
