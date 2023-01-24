@@ -4,7 +4,7 @@
   "description": "A basic NextJS app",
   "main": "pages/index.ts",
   "scripts": {
-    "test": "next dev"
+    "dev": "next dev"
   },
   "repository": {
     "type": "git",
