@@ -5,8 +5,8 @@ import db from 'db';
 
 class ItemHandler {
   @Post()
-  async addItem(@Body(ValidationPipe) body: ItemDTO) {
-    await db.item.create({ data: body }); 
+  async addItem(@Body(ValidationPipe) body: ItemDTO[]) {
+    await db.item.createMany({ data: body }); 
     return true;
   }
 }

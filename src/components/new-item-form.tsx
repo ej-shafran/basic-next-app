@@ -28,12 +28,12 @@ const NewItemForm: React.FC<NewProductFormProps> = (props) => {
           <ul>
             {values.map((_, i) => (<li key={i}>
               <div>
-                <label htmlFor={`[${i}].amount`}>Enter the product's name:</label>
-                <Field name={`[${i}].amount`} id={`[${i}].amount`} />
+                <label htmlFor={`[${i}].amount`}>Enter the item's amount:</label>
+                <Field name={`[${i}].amount`} id={`[${i}].amount`} type="number" />
                 <ErrorMessage name={`[${i}].amount`} />
               </div>
               <div>
-                <label htmlFor={`[${i}].color`}>Enter the product's name:</label>
+                <label htmlFor={`[${i}].color`}>Enter the item's color:</label>
                 <FormikSelect name={`[${i}].color`} id={`[${i}].color`}>
                   {Object.values(Color).map(color => (<option key={color} value={color}>
                     {color}
