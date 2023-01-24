@@ -18,13 +18,19 @@ const SignInPage: NextPage = () => {
             redirect: false
           })
           console.log(result);
-          if(!result.error && result.ok) router.push("/");
+          if (!result.error && result.ok) router.push("/");
           else router.push("/auth/error");
         }}
       >
         <Form>
-          <Field name="email" type="email" label="Enter your email:" />
-          <Field name="password" type="password" label="Enter your password:" />
+          <div>
+            <label htmlFor="email">Enter your email:</label>
+            <Field name="email" id="email" type="email" />
+          </div>
+          <div>
+            <label htmlFor="password">Enter your password:</label>
+            <Field name="password" id="password" type="password" />
+          </div>
           <button type="submit">Sign In</button>
         </Form>
       </Formik>
