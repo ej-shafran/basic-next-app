@@ -19,7 +19,7 @@ const SignInPage: NextPage = () => {
           })
           console.log(result);
           if (!result.error && result.ok) router.push("/");
-          else router.push("/auth/error");
+          else router.push("/error");
         }}
       >
         <Form>
