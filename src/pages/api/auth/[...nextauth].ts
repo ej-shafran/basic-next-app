@@ -12,7 +12,7 @@ export default NextAuth({
     Credentials({
       type: "credentials",
       credentials: {},
-      authorize: async (credentials: { email: string; password: string; }, req) => {
+      authorize: async (credentials: { email: string; password: string; }) => {
         const user = await db.user.findUnique({ where: { email: credentials.email } });
         if (!user) throw new Error("Invalid credentials.");
 
@@ -28,9 +28,15 @@ export default NextAuth({
   },
   callbacks: {
     jwt(params) {
+      if(params.user && params.user.role) {
+        params.token.role = params.user.role;
+      }
       return params.token;
     },
     session(params) {
+      if(params.token.role) {
+        params.session.user.role = params.token.role;
+      }
       return params.session;
     },
   }
