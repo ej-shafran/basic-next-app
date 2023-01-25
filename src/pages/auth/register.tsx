@@ -1,25 +1,26 @@
 import { NextPage } from "next";
-// import { useRouter } from "next/router";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { omit } from 'lodash';
 import axios from "axios";
 
+import { registerSchema } from "schemas/register.schema";
+import { signIn } from "next-auth/react";
 import { RegisterDTO } from "types/register.dto";
-import { registerSchema } from "class-validator";
+import { useRouter } from "next/router";
 
 const RegisterPage: NextPage = () => {
-  // const router = useRouter();
+  const router = useRouter();
 
   return (
     <div>
       <Formik
         initialValues={{ name: "", password: "", email: "", confirmPassword: "" }}
         onSubmit={async (values) => {
-          const body: RegisterDTO = {
-            ...omit(values, "confirmPassword")
-          }
+          const body: RegisterDTO = omit(values, "confirmPassword") 
           const { data: id } = await axios.post<number>("/api/auth/register", body);
           console.log(id);
+          await signIn("credentials", omit(body, "name"));
+          router.push("/");
         }}
         validationSchema={registerSchema}
       >

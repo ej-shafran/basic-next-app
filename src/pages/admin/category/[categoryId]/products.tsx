@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context)
     notFound: true
   }
 
-  const categoryId = parseFloat(rawId);
+  const categoryId = parseInt(rawId);
 
   const category = await db.category.findUnique({ where: { id: categoryId }, include: { products: true } })
 
