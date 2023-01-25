@@ -22,8 +22,9 @@ const HomePage: NextPage = () => {
 
   return <>
     <p>You are not signed in.</p>
-    <button onClick={() => signIn()}>Sign In</button>
+    <button onClick={() => signIn()}>Sign In With Credentials</button>
     <button onClick={() => signIn("google", { callbackUrl: "http://localhost:3000" })}>Sign In With Google</button>
+    <button onClick={() => signIn("github", { callbackUrl: "http://localhost:3000" })}>Sign In With GitHub</button>
     <p>Or <Link href="/auth/register">Register Here</Link></p>
   </>
 }
