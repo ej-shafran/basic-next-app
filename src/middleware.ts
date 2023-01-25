@@ -9,11 +9,15 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: (params) => params.token && params.token.role === Role.ADMIN
+      authorized: (params) => {
+        if(params.req.nextUrl.pathname.startsWith("/admin")) return params.token && params.token.role === Role.ADMIN
+
+        return !!params.token;
+      }
     }
   }
 );
 
 export const config = {
-  matcher: ["/admin/:path*"]
+  matcher: ["/admin/:path*", "/store/storefront"]
 }
