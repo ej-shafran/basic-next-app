@@ -1,5 +1,7 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
+import GithubProvider from 'next-auth/providers/github';
 import { compare } from 'bcrypt';
 
 import db from 'db';
@@ -21,6 +23,14 @@ export default NextAuth({
 
         return user;
       },
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
     })
   ],
   pages: {
@@ -28,13 +38,13 @@ export default NextAuth({
   },
   callbacks: {
     jwt(params) {
-      if(params.user && params.user.role) {
+      if (params.user && params.user.role) {
         params.token.role = params.user.role;
       }
       return params.token;
     },
     session(params) {
-      if(params.token.role) {
+      if (params.token.role) {
         params.session.user.role = params.token.role;
       }
       return params.session;
