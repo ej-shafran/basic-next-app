@@ -4,6 +4,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from "next/router";
 
 import { signInSchema } from 'schemas/sign-in.schema';
+import Link from "next/link";
 
 const SignInPage: NextPage = () => {
   const router = useRouter();
@@ -39,6 +40,8 @@ const SignInPage: NextPage = () => {
           <button type="submit">Sign In</button>
         </Form>
       </Formik>
+
+      <p>Not registered? <Link href="/auth/register">Sign up here.</Link></p>
     </div>
   );
 }

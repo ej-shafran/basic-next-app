@@ -36,7 +36,7 @@ const ProductsPage: NextPage<PageProps> = (props) => {
       <h2>Existing items:</h2>
       <ol>
         {items.map(({ id }) => (<li key={id}>
-          <p>Item: ID ${id}</p>
+          <p>Item: ID {id}</p>
           <button onClick={async () => {
             try {
               await axios.delete("/api/store/item", {
@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context)
     notFound: true
   }
 
-  const productId = parseFloat(rawId);
+  const productId = parseInt(rawId);
 
   const product = await db.product.findUnique({ where: { id: productId }, include: { items: true } })
 
