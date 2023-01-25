@@ -6,8 +6,11 @@ import axios from "axios";
 import { registerSchema } from "schemas/register.schema";
 import { signIn } from "next-auth/react";
 import { RegisterDTO } from "types/register.dto";
+import { useRouter } from "next/router";
 
 const RegisterPage: NextPage = () => {
+  const router = useRouter();
+
   return (
     <div>
       <Formik
@@ -16,7 +19,8 @@ const RegisterPage: NextPage = () => {
           const body: RegisterDTO = omit(values, "confirmPassword") 
           const { data: id } = await axios.post<number>("/api/auth/register", body);
           console.log(id);
-          signIn("credentials", omit(body, "name"));
+          await signIn("credentials", omit(body, "name"));
+          router.push("/");
         }}
         validationSchema={registerSchema}
       >
